@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bar chart showing the highest number of immigrants to Australia by country, with an immigration total number filter.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/datasource-auDetail.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "fold": ["2011", "2012", "2013", "2014", "2015"],
+      "as": ["Year", "Immigration"]
+    },
+    {"filter": "datum.Total <= immigration_top_slider"}
+  ],
+  "width": 1000,
+  "height": 800,
+  "params": [
+    {
+      "name": "immigration_top_slider",
+      "value": 10000,
+      "bind": {
+        "input": "range",
+        "min": 10000,
+        "max": 280000,
+        "step": 10000,
+        "name": "Max Total Immigration Count: "
+      }
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "title": "Country",
+      "sort": "-x"
+    },
+    "x": {
+      "field": "Immigration",
+      "type": "quantitative",
+      "title": "Immigration to Australia"
+    },
+    "color": {"field": "Year", "type": "nominal", "title": "Year"},
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {"field": "Year", "type": "nominal", "title": "Year"},
+      {
+        "field": "Immigration",
+        "type": "quantitative",
+        "title": "Immigration Count"
+      },
+      {
+        "field": "Total",
+        "type": "quantitative",
+        "title": "Total Immigration (2011-2015)"
+      }
+    ]
+  },
+  "config": {"axis": {"labelFontSize": 12, "titleFontSize": 14, "grid": false}}
+}
