@@ -60,33 +60,46 @@
 <body>
     <h1>Non-Australian Immigrant Statistics from 2011-2015</h1>
     
-    <!-- 第一个可视化: 澳大利亚的移民热力图 -->
+    <!-- 第1个可视化: 澳大利亚的移民热力图 -->
     <div class="vis-container">
         <h2>Immigrant population heat map for Australia</h2>
         <p>This heat map shows the distribution of immigrant population across different states in Australia from 2011 to 2015. The darker areas indicate higher numbers of immigrants.</p>
-        <div id="vis3"></div>
+        <div id="vis1"></div>
     </div>
-
-    <!-- 第二个可视化: 各国移民人口的条形图 -->
+    <!-- 第2个可视化: 澳大利亚的州移民数据对比 -->
     <div class="vis-container">
-        <h2>Bar chart of immigrant population by country of origin</h2>
-        <p>This bar chart highlights the top countries contributing to the immigrant population in Australia between 2011 and 2015. The chart displays yearly immigrant numbers for each country.</p>
+        <h2>Comparison of immigration data for each state in Australia</h2>
+        <p>Maps can give you a rough idea, but just looking at a map doesn't give you a good idea of ​​the immigration trends in each state of Australia. The line chart below shows this very well.</p>
         <div id="vis2"></div>
     </div>
 
+    <!-- 第3个可视化: 各国移民人口的条形图 -->
+    <div class="vis-container">
+        <h2>Bar chart of immigrant population by country of origin</h2>
+        <p>This bar chart highlights the top countries contributing to the immigrant population in Australia between 2011 and 2015. The chart displays yearly immigrant numbers for each country.</p>
+        <div id="vis3"></div>
+    </div>
+
     <script type="text/javascript">
-        // 加载第一个可视化: 澳大利亚的移民热力图
+        // 加载第1个可视化: 澳大利亚的移民热力图
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auMap.json')
         .then(response => response.json())
         .then(spec => {
-            vegaEmbed('#vis3', spec).catch(console.error);
+            vegaEmbed('#vis1', spec).catch(console.error);
         });
 
-        // 加载第二个可视化: 各国移民人口的条形图
-        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
+        // 加载第2个可视化: 澳大利亚的州移民数据对比
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualisation-lineChartStates.json')
         .then(response => response.json())
         .then(spec => {
             vegaEmbed('#vis2', spec).catch(console.error);
+        });
+
+        // 加载第3个可视化: 各国移民人口的条形图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
+        .then(response => response.json())
+        .then(spec => {
+            vegaEmbed('#vis3', spec).catch(console.error);
         });
     </script>
 </body>
