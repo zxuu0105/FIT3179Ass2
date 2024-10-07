@@ -4,44 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiple Vega-Lite Visualizations</title>
-    <!-- 引入 Vega, Vega-Lite 和 Vega-Embed -->
+    
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 48px;
+            color: #333;
+        }
+
+        h2 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .vis-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 40px;
+        }
+
+        .vis-container div {
+            width: 80%;
+            max-width: 1000px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>My Vega-Lite Visualizations</h1>
+    <h1>Non-Australian Immigrant Statistics from 2011-2015</h1>
+    
+    <!-- 第一个可视化: 澳大利亚的移民热力图 -->
+    <div class="vis-container">
+        <h2>Immigrant population heat map for Australia</h2>
+        <p>This heat map shows the distribution of immigrant population across different states in Australia from 2011 to 2015. The darker areas indicate higher numbers of immigrants.</p>
+        <div id="vis3"></div>
+    </div>
 
-
-
-    <!-- 可视化2：所有国家的条形图 -->
-    <h2>Visualization 2: All Country Bar Chart</h2>
-    <div id="vis2"></div>
-
-    <!-- 可视化3：澳大利亚地图 -->
-    <h2>Visualization 3: Australia Map</h2>
-    <div id="vis3"></div>
+    <!-- 第二个可视化: 各国移民人口的条形图 -->
+    <div class="vis-container">
+        <h2>Bar chart of immigrant population by country of origin</h2>
+        <p>This bar chart highlights the top countries contributing to the immigrant population in Australia between 2011 and 2015. The chart displays yearly immigrant numbers for each country.</p>
+        <div id="vis2"></div>
+    </div>
 
     <script type="text/javascript">
-        // 加载第一个可视化：折线图
-        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualisation-lineChart.json')
-        .then(response => response.json())
-        .then(spec => {
-            vegaEmbed('#vis1', spec).catch(console.error);
-        });
-
-        // 加载第二个可视化：所有国家的条形图
-        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
-        .then(response => response.json())
-        .then(spec => {
-            vegaEmbed('#vis2', spec).catch(console.error);
-        });
-
-        // 加载第三个可视化：澳大利亚地图
+        // 加载第一个可视化: 澳大利亚的移民热力图
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auMap.json')
         .then(response => response.json())
         .then(spec => {
             vegaEmbed('#vis3', spec).catch(console.error);
+        });
+
+        // 加载第二个可视化: 各国移民人口的条形图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
+        .then(response => response.json())
+        .then(spec => {
+            vegaEmbed('#vis2', spec).catch(console.error);
         });
     </script>
 </body>
