@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Vega-Lite Visualizations</title>
+    <!-- 引入 Vega, Vega-Lite 和 Vega-Embed -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <h1>My Vega-Lite Visualizations</h1>
+
+    <!-- 可视化1：折线图 --> 
+    <h2>Visualization 1: Line Chart</h2>
+    <div id="vis1"></div>
+
+    <!-- 可视化2：所有国家的条形图 -->
+    <h2>Visualization 2: All Country Bar Chart</h2>
+    <div id="vis2"></div>
+
+    <!-- 可视化3：澳大利亚地图 -->
+    <h2>Visualization 3: Australia Map</h2>
+    <div id="vis3"></div>
+
+    <script type="text/javascript">
+        // 加载第一个可视化：折线图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualisation-lineChart.json')
+        .then(response => response.json())
+        .then(spec => {
+            vegaEmbed('#vis1', spec).catch(console.error);
+        });
+
+        // 加载第二个可视化：所有国家的条形图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
+        .then(response => response.json())
+        .then(spec => {
+            vegaEmbed('#vis2', spec).catch(console.error);
+        });
+
+        // 加载第三个可视化：澳大利亚地图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auMap.json')
+        .then(response => response.json())
+        .then(spec => {
+            vegaEmbed('#vis3', spec).catch(console.error);
+        });
+    </script>
+</body>
+</html>
