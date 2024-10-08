@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Bar chart showing immigration numbers by state for selected year.",
   "width": 1200,
-  "height": 600,
+  "height": 1200,
   "data": {
     "url": "https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/datasource-auTotal.csv",
     "format": {"type": "csv"}
