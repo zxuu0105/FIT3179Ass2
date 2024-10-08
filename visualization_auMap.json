@@ -3,55 +3,100 @@
   "width": 800,
   "height": 800,
   "projection": {"type": "mercator"},
-  "data": {
-    "url": "https://raw.githubusercontent.com/zxuu0105/3179wk9Homework/refs/heads/main/ne_10m.json",
-    "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
-  },
-  "transform": [
+  "layer": [
     {
-      "lookup": "properties.name",
-      "from": {
-        "data": {
-          "url": "https://raw.githubusercontent.com/zxuu0105/3179wk9Homework/refs/heads/main/datasource-au.csv",
-          "format": {"type": "csv"}
+      "data": {
+        "url": "https://raw.githubusercontent.com/zxuu0105/3179wk9Homework/refs/heads/main/ne_10m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/1datasource-auTotal.csv",
+              "format": {"type": "csv"}
+            },
+            "key": "State",
+            "fields": [
+              "2011",
+              "2012",
+              "2013",
+              "2014",
+              "2015",
+              "Territory Area (km?)"
+            ]
+          }
         },
-        "key": "State",
-        "fields": ["2011", "2012", "2013", "2014", "2015"]
+        {
+          "fold": ["2011", "2012", "2013", "2014", "2015"],
+          "as": ["Year", "Immigration"]
+        },
+        {
+          "calculate": "datum.Immigration / datum['Territory Area (km?)']",
+          "as": "ImmigrationDensity"
+        }
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "field": "ImmigrationDensity",
+          "type": "quantitative",
+          "title": "Immigration Density",
+          "scale": {"scheme": "spectral", "domain": [0, 5], "reverse": true}
+        },
+        "tooltip": [
+          {"field": "properties.name", "type": "nominal", "title": "State"},
+          {
+            "field": "ImmigrationDensity",
+            "type": "quantitative",
+            "title": "Immigration Density",
+            "format": ".3f"
+          }
+        ],
+        "opacity": {
+          "condition": {"param": "year_select", "value": 1},
+          "value": 0.2
+        }
       }
     },
     {
-      "fold": ["2011", "2012", "2013", "2014", "2015"],
-      "as": ["Year", "Immigration"]
+      "data": {
+        "url": "https://raw.githubusercontent.com/zxuu0105/3179wk9Homework/refs/heads/main/ne_10m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "black",
+        "strokeWidth": 0.4,
+        "fill": null
+      }
     }
   ],
-  "mark": "geoshape",
-  "encoding": {
-    "color": {
-      "field": "Immigration",
-      "type": "quantitative",
-      "scale": {"scheme": "blues", "domain": [0, 200000]}
-    },
-    "tooltip": [
-      {"field": "properties.name", "type": "nominal", "title": "State"},
-      {
-        "field": "Immigration",
-        "type": "quantitative",
-        "title": "Immigration No"
-      }
-    ],
-    "opacity": {"condition": {"param": "year_select", "value": 1}, "value": 0.2}
-  },
   "params": [
     {
       "name": "year_select",
-      "select": {"type": "point", "fields": ["Year"]},
+      "value": 2015,
       "bind": {
-        "input": "select",
-        "options": ["2011", "2012", "2013", "2014", "2015"],
+        "input": "range",
+        "min": 2011,
+        "max": 2015,
+        "step": 1,
         "name": "Select Year: "
-      },
-      "value": "2015"
+      }
     }
   ],
-  "config": {}
+  "config": {
+    "background": "#d0f0fd",
+    "style": {
+      "guide-label": {"fontSize": 12},
+      "tooltip": {"fontSize": 14, "font": "Arial"}
+    }
+  }
 }
