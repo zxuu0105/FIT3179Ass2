@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Line chart showing immigration trends from 2011 to 2015 for each Australian state, with a state filter.",
+  "description": "Line chart showing immigration trends from 2011 to 2015 for each Australian state, with data points on the lines.",
   "data": {
     "url": "https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/datasource-auTotal.csv",
     "format": {"type": "csv"}
@@ -13,59 +13,47 @@
   ],
   "width": 800,
   "height": 800,
-  "selection": {
-    "state_select": {
-      "type": "multi",
-      "fields": ["State"],
-      "bind": {
-        "input": "select",
-        "options": [
-          "Australian Capital Territory",
-          "Northern Territory",
-          "Western Australia",
-          "South Australia",
-          "Queensland",
-          "Victoria",
-          "New South Wales",
-          "Tasmania"
-        ],
-        "name": "Select State: "
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {"labelAngle": 0}
+        },
+        "y": {
+          "field": "Immigration",
+          "type": "quantitative",
+          "title": "Number of Immigrants",
+          "scale": {"domain": [0, 180000]}
+        },
+        "color": {
+          "field": "State",
+          "type": "nominal",
+          "title": "State",
+          "legend": {"orient": "right", "labelFontSize": 13}
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {
+            "field": "Immigration",
+            "type": "quantitative",
+            "title": "Immigration Count"
+          }
+        ]
+      }
+    },
+    {
+      "mark": "point",
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal"},
+        "y": {"field": "Immigration", "type": "quantitative"},
+        "color": {"field": "State", "type": "nominal"}
       }
     }
-  },
-  "mark": "line",
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "ordinal",
-      "title": "Year",
-      "axis": {"labelAngle": 0}
-    },
-    "y": {
-      "field": "Immigration",
-      "type": "quantitative",
-      "title": "Number of Immigrants",
-      "scale": {"domain": [0, 180000]}
-    },
-    "color": {
-      "field": "State",
-      "type": "nominal",
-      "title": "State",
-      "legend": {"orient": "top-left"}
-    },
-    "opacity": {
-      "condition": {"selection": "state_select", "value": 1},
-      "value": 0.2
-    },
-    "tooltip": [
-      {"field": "State", "type": "nominal", "title": "State"},
-      {"field": "Year", "type": "ordinal", "title": "Year"},
-      {
-        "field": "Immigration",
-        "type": "quantitative",
-        "title": "Immigration Count"
-      }
-    ]
-  },
-  "config": {"axis": {"labelFontSize": 12, "titleFontSize": 14, "grid": true}}
+  ],
+  "config": {"axis": {"labelFontSize": 14, "titleFontSize": 16, "grid": true}}
 }
