@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=2">
     <title>Multiple Vega-Lite Visualizations</title>
     
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -15,7 +15,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9;
+            background-color: #b8b7b7; /* 修改页面背景色为略浅的灰色 */
             margin: 0;
             padding: 20px;
             text-align: center;
@@ -25,6 +25,9 @@
             font-family: 'Lobster', cursive;
             font-size: 48px;
             color: #333;
+            max-width: 800px;  /* 限制最大宽度 */
+            margin: 0 auto;  /* 居中对齐 */
+            word-wrap: break-word;  /* 自动换行 */
         }
 
         h2 {
@@ -32,66 +35,213 @@
             font-weight: 600;
             font-size: 28px;
             color: #555;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            max-width: 600px;  /* 限制最大宽度 */
+            margin: 0 auto;  /* 居中对齐 */
+            word-wrap: break-word;  /* 自动换行 */
         }
 
         p {
             font-family: 'Open Sans', sans-serif;
             font-size: 18px;
-            color: #666;
+            color: #525252;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            max-width: 1100px;  /* 限制最大宽度 */
+            margin: 20px 15px 10px 50px;
+            word-wrap: break-word;  /* 自动换行 */
+        }
+
+  
+    
+
+        /* 通用方块样式 */
+        .section {
+            background-color: #fff; /* 调整为白色背景 */
+            padding: 60px;
+            margin-bottom: 80px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0; /* 添加边框 */
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
+            max-width: 1250px; /* 限制每个 section 的最大宽度 */
+            margin: 20px 30px 10px 450px;
+            margin: 0 auto;
+
+            
+        }
+
+        /* 用于并排显示的容器 */
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px; /* 使用 gap 来调整图表之间的距离 */
             margin-bottom: 20px;
         }
 
         .vis-container {
+            width: 100%; /* 调整每个图表容器的宽度 */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-bottom: 40px;
+            justify-content: center; /* 图表容器居中 */
         }
 
         .vis-container div {
-            width: 80%;
-            max-width: 1000px;
+            width: 100%;
             height: auto;
         }
+
+       
     </style>
 </head>
 <body>
     <h1>Non-Australian Immigrant Statistics from 2011-2015</h1>
+    <p>Author: Zhiteng Xu            Date:11/10/2024</p>
     
-    <!-- 第1个可视化: 澳大利亚的移民热力图 -->
-    <div class="vis-container">
-        <h2>Immigrant population heat map for Australia</h2>
-        <p>This heat map shows the distribution of immigrant population across different states in Australia from 2011 to 2015. The darker areas indicate higher numbers of immigrants.</p>
-        <div id="vis1"></div>
-    </div>
-    <!-- 第2个可视化: 澳大利亚的州移民数据对比 -->
-    <div class="vis-container">
+    <!-- section 1 -->
+    <section class="section">
+        <p>Australia has long been a popular destination for immigrants, with a diverse population composition that brings together different cultures. This visualization project aims to explore the immigration trends and distribution in Australia from 2011 to 2015. Through various charts, it illustrates the immigrant composition and changes in each state, with a focus on analyzing data from key immigrant source countries. Using heat maps, pie charts, and line charts, we can clearly understand the immigration growth in different states over the five-year period and the impact of immigrant source countries on Australia's population composition. This series of charts helps reveal changes in immigration patterns and provides data support for future immigration policy development.</p>
+        <p>All the data on this page comes from the Australian Bureau of Statistics:
+            https://www.abs.gov.au/statistics/people/population/overseas-migration/latest-release#data-downloads</p>
+        <h2>Australian Immigration Distribution Data Overview(2011-2015)</h2>
+        <p>On the left is a map of Australia, showing the population density of immigrants. Population density is calculated by immigrant population/territory area (square kilometers), with higher numbers representing higher immigrant population density. The unit is persons per square kilometer. On the right is the immigrant population statistics for each state in Australia, displaying the specific number of immigrants per state. Please use the slider to view the data for different years on both charts.</p>
+      
+        
+        <div class="row">
+            <!-- map -->
+            <div class="vis-container">
+                <div id="vis1"></div>
+            </div>
+
+            <!-- bar chatr-->
+            <div class="vis-container">
+                <div id="vis4"></div>
+            </div>
+        </div>
+        <p>From the map above, although the immigrant population density in Australia appears to be almost unchanged, this does not necessarily indicate that the immigrant population in Australia is very stable. The line chart below may better highlight the changes in immigrant populations across the states.</p>
+    </section>
+
+    <!-- section 2 -->
+    <section class="section">
         <h2>Comparison of immigration data for each state in Australia</h2>
-        <p>Maps can give you a rough idea, but just looking at a map doesn't give you a good idea of ​​the immigration trends in each state of Australia. The line chart below shows this very well.</p>
-        <div id="vis2"></div>
-    </div>
+        
+        <div class="vis-container">
+            <div id="vis2"></div>
+        </div>
+        <p>This line chart shows the changes in the immigrant population across Australian states from 2011 to 2015. From the chart above, we can see that New South Wales is the most popular state, with a significantly higher number of immigrants and an increasing trend. Victoria follows closely behind, with a similar upward trend, though the total number is lower. Queensland and Western Australia, ranked third and fourth, show a downward trend. The remaining states have consistently remained less popular.</p>
+    </section>
+    
+    
+    <!--  section5: 4 pies -->
+    <section class="section">
+        <p>From the data above, it can be seen that New South Wales, Victoria, Western Australia, and Queensland are the four most popular states among immigrants, with immigration numbers far surpassing those of other states. This section highlights the detailed composition of immigrant nationalities for these four states, showcasing the major immigrant groups from 2011 to 2015.</p>
+        <h2>Immigration Shares by State (2011-2015)</h2>
+        <p>This section shows the immigration shares for different states of Australia. Each pie chart represents the share of immigration to a particular state from 2011 to 2015. Please note that this section only details the top four countries with the highest immigrant proportions. Other countries are represented as 'Other Countries/Areas'</p>
+        <p>Please note: "UK, CIs & IOM" refers to:
 
-    <!-- 第3个可视化: 各国移民人口的条形图 -->
-    <div class="vis-container">
+            UK: United Kingdom, including England, Scotland, Wales, and Northern Ireland.
+            CIs: Channel Islands, located in the English Channel, consisting of two main administrative areas: Jersey and Guernsey.
+            IOM: Isle of Man, an autonomous territory situated in the Irish Sea.
+            These regions are often grouped with the UK in statistical reports as they are related territories.</p>
+        <div class="row">
+            <!-- QL pie -->
+            <div class="vis-container">
+                <div id="visQL"></div>
+            </div>
+
+            <!-- VIC pie -->
+            <div class="vis-container">
+                <div id="visVIC"></div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <!-- NSW pie-->
+            <div class="vis-container">
+                <div id="visNSW"></div>
+            </div>
+
+            <!-- WA pie -->
+            <div class="vis-container">
+                <div id="visWA"></div>
+            </div>
+        </div>
+
+        <p>As seen from the charts above, the countries with the highest immigrant proportions are China, India, and the UK (referred to as UK for 'CIS & IOM' below), all of which appear in all four pie charts. New Zealand ranks fourth and appears twice in the four pie charts.
+        </p>
+    </section>
+
+    <!-- section 3: bar chart of all countries-->
+    <section class="section">
+        <p>Although the top four states above account for the vast majority of the immigrant population, to provide a more direct comparison of the number of immigrants from each country to Australia between 2011 and 2015, this section displays all countries with annual immigration numbers greater than 1,000 for your reference.</p>
         <h2>Bar chart of immigrant population by country of origin</h2>
-        <p>This bar chart highlights the top countries contributing to the immigrant population in Australia between 2011 and 2015. The chart displays yearly immigrant numbers for each country.</p>
-        <div id="vis3"></div>
-    </div>
+        <p>This bar chart highlights the top countries contributing to the immigrant population in Australia between 2011 and 2015. The chart displays yearly immigrant numbers for each country. Use slider to filter the data.</p>
+        <div class="vis-container">
+            <div id="vis3"></div>
+        </div>
+        <p>Through this bar chart, the nationalities of immigrants to Australia each year are clear at a glance. The four countries with the highest proportions mentioned in the previous section rank at the top, which aligns with the conclusions drawn from the previous section.</p>
+    </section>
 
+    <!-- Section 4 -->
+    <section class="section">
+        <p>We will once again extract the top four countries with the highest number of immigrants and examine their immigration trends individually. Due to space limitations, we had to focus on the most representative data for analysis. A high total ranking does not necessarily mean that the number of immigrants from that country is continuously increasing. Studying the immigration trends of specific countries can help gain a deeper understanding of Australia's immigration situation.</p>
+        <h2>Immigration Trends for Top 4 Countries (2011-2015)</h2>
+        <p>This section presents the immigration trends for the top four countries with the highest number of immigrants to Australia between 2011 and 2015. Each line chart shows the trend of immigrant numbers over these five years for one country.</p>
+        
+        <div class="row">
+            <!-- UK linechart -->
+            <div class="vis-container">
+                <div id="visUK"></div>
+            </div>
+    
+            <!-- New Zealand linechart -->
+            <div class="vis-container">
+                <div id="visNZ"></div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <!-- India linechart -->
+            <div class="vis-container">
+                <div id="visIndia"></div>
+            </div>
+    
+            <!-- China linechart -->
+            <div class="vis-container">
+                <div id="visChina"></div>
+            </div>
+        </div>
+
+        <p>
+            From the line chart, it is evident that immigration from the UK and New Zealand has significantly declined, indicating a reduced demand for immigration from these countries. Immigration trends from India and China, especially China, are clearly on the rise, showing that Australia is becoming increasingly attractive to immigrants from these two countries.</p>
+    </section>
+
+
+    
     <script type="text/javascript">
         // 加载第1个可视化: 澳大利亚的移民热力图
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auMap.json')
         .then(response => response.json())
         .then(spec => {
+            spec.width = 450;  // 调整热力图宽度
+            spec.height = 400;  // 调整热力图高度
             vegaEmbed('#vis1', spec).catch(console.error);
+        });
+
+        // 加载新的柱状图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auPopulationBarChart.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 450;  // 调整柱状图宽度
+            spec.height = 400;  // 调整柱状图高度
+            vegaEmbed('#vis4', spec).catch(console.error);
         });
 
         // 加载第2个可视化: 澳大利亚的州移民数据对比
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualisation-lineChartStates.json')
         .then(response => response.json())
         .then(spec => {
+            spec.width = 650;  // 调整折线图宽度
+            spec.height = 600;  // 调整折线图高度
             vegaEmbed('#vis2', spec).catch(console.error);
         });
 
@@ -99,7 +249,81 @@
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
         .then(response => response.json())
         .then(spec => {
+            spec.width = 650;  // 调整折线图宽度
+            spec.height = 600;  // 调整折线图高度
             vegaEmbed('#vis3', spec).catch(console.error);
+        });
+
+         // 加载 UK 的移民趋势折线图
+         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_UK.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 450;  // 调整折线图宽度
+            spec.height = 400;  // 调整折线图高度
+            vegaEmbed('#visUK', spec).catch(console.error);
+        });
+    
+        // 加载 New Zealand 的移民趋势折线图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_NewZealand.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 450;  // 调整折线图宽度
+            spec.height = 400;  // 调整折线图高度
+            vegaEmbed('#visNZ', spec).catch(console.error);
+        });
+    
+        // 加载 India 的移民趋势折线图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_India.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 450;  // 调整折线图宽度
+            spec.height = 400;  // 调整折线图高度
+            vegaEmbed('#visIndia', spec).catch(console.error);
+        });
+    
+        // 加载 China 的移民趋势折线图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_China.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 450;  // 调整折线图宽度
+            spec.height = 400;  // 调整折线图高度
+            vegaEmbed('#visChina', spec).catch(console.error);
+        });
+
+        // 加载 QL 饼图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_QL.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 350;  // 调整饼图宽度
+            spec.height = 300;  // 调整饼图高度
+            vegaEmbed('#visQL', spec).catch(console.error);
+        });
+
+        // 加载 VIC 饼图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_VIC.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 350;  // 调整饼图宽度
+            spec.height = 300;  // 调整饼图高度
+            vegaEmbed('#visVIC', spec).catch(console.error);
+        });
+
+        // 加载 NSW 饼图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_NSW.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 350;  // 调整饼图宽度
+            spec.height = 300;  // 调整饼图高度
+            vegaEmbed('#visNSW', spec).catch(console.error);
+        });
+
+        // 加载 WA 饼图
+        fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_WA.json')
+        .then(response => response.json())
+        .then(spec => {
+            spec.width = 350;  // 调整饼图宽度
+            spec.height = 300;  // 调整饼图高度
+            vegaEmbed('#visWA', spec).catch(console.error);
         });
     </script>
 </body>
