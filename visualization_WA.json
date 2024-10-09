@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Immigration Share in Western Australia (2011-2015)",
+    "fontSize": 20,
+    "anchor": "start",
+    "color": "black"
+  },
+  "data": {
+    "values": [
+      {"Country": "Philippines", "Total": 14260},
+      {"Country": "India", "Total": 25160},
+      {"Country": "UK, CIs & IOM", "Total": 18950},
+      {"Country": "Bhutan", "Total": 12870},
+      {"Country": "Other Countries/Areas", "Total": 79120}
+    ]
+  },
+  "transform": [
+    {
+      "window": [{"op": "sum", "field": "Total", "as": "TotalSum"}],
+      "frame": [null, null]
+    },
+    {
+      "calculate": "round(datum.Total / datum.TotalSum * 100 * 10) / 10",
+      "as": "Percentage"
+    },
+    {"calculate": "datum.Percentage + '%'", "as": "PercentageWithSymbol"}
+  ],
+  "mark": "arc",
+  "encoding": {
+    "theta": {
+      "field": "Total",
+      "type": "quantitative",
+      "title": "Total Immigration"
+    },
+    "color": {
+      "field": "Country",
+      "type": "nominal",
+      "title": "Country",
+      "scale": {
+        "domain": [
+          "Philippines",
+          "India",
+          "UK, CIs & IOM",
+          "Bhutan",
+          "Other Countries/Areas"
+        ],
+        "range": ["#af7d78", "#ff7f0e", "#2ca02c", "#5f2028", "#9467bd"]
+      }
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {"field": "Total", "type": "quantitative", "title": "Total Immigration"},
+      {
+        "field": "PercentageWithSymbol",
+        "type": "nominal",
+        "title": "Percentage"
+      }
+    ]
+  },
+  "view": {"stroke": null},
+  "config": {
+    "legend": {"orient": "right", "titleFontSize": 14, "labelFontSize": 14}
+  }
+}

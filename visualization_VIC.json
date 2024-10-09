@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Immigration Share in Victoria (2011-2015)",
+    "fontSize": 20,
+    "anchor": "start",
+    "color": "black"
+  },
+  "data": {
+    "values": [
+      {"Country": "China", "Total": 89310},
+      {"Country": "India", "Total": 76280},
+      {"Country": "UK, CIs & IOM", "Total": 38620},
+      {"Country": "Malaysia", "Total": 29490},
+      {"Country": "Other Countries/Areas", "Total": 188210}
+    ]
+  },
+  "transform": [
+    {
+      "window": [{"op": "sum", "field": "Total", "as": "TotalSum"}],
+      "frame": [null, null]
+    },
+    {
+      "calculate": "round(datum.Total / datum.TotalSum * 100 * 10) / 10",
+      "as": "Percentage"
+    },
+    {"calculate": "datum.Percentage + '%'", "as": "PercentageWithSymbol"}
+  ],
+  "mark": "arc",
+  "encoding": {
+    "theta": {
+      "field": "Total",
+      "type": "quantitative",
+      "title": "Total Immigration"
+    },
+    "color": {
+      "field": "Country",
+      "type": "nominal",
+      "title": "Country",
+      "scale": {
+        "domain": [
+          "China",
+          "India",
+          "UK, CIs & IOM",
+          "Malaysia",
+          "Other Countries/Areas"
+        ],
+        "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d6d729", "#9467bd"]
+      }
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {"field": "Total", "type": "quantitative", "title": "Total Immigration"},
+      {
+        "field": "PercentageWithSymbol",
+        "type": "nominal",
+        "title": "Percentage"
+      }
+    ]
+  },
+  "view": {"stroke": null},
+  "config": {
+    "legend": {"orient": "right", "titleFontSize": 14, "labelFontSize": 14}
+  }
+}

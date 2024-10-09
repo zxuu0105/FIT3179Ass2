@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Immigration Share in Queensland (2011-2015)",
+    "fontSize": 20,
+    "anchor": "start",
+    "color": "black"
+  },
+  "data": {
+    "values": [
+      {"Country": "China", "Total": 30300},
+      {"Country": "India", "Total": 26720},
+      {"Country": "UK, CIs & IOM", "Total": 38230},
+      {"Country": "New Zealand", "Total": 57600},
+      {"Country": "Other Countries/Areas", "Total": 136700}
+    ]
+  },
+  "transform": [
+    {
+      "window": [{"op": "sum", "field": "Total", "as": "TotalSum"}],
+      "frame": [null, null]
+    },
+    {
+      "calculate": "round(datum.Total / datum.TotalSum * 100 * 10) / 10",
+      "as": "Percentage"
+    },
+    {"calculate": "datum.Percentage + '%'", "as": "PercentageWithSymbol"}
+  ],
+  "mark": "arc",
+  "encoding": {
+    "theta": {
+      "field": "Total",
+      "type": "quantitative",
+      "title": "Total Immigration"
+    },
+    "color": {
+      "field": "Country",
+      "type": "nominal",
+      "title": "Country",
+      "scale": {
+        "domain": [
+          "China",
+          "India",
+          "UK, CIs & IOM",
+          "New Zealand",
+          "Other Countries/Areas"
+        ],
+        "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"]
+      }
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {"field": "Total", "type": "quantitative", "title": "Total Immigration"},
+      {
+        "field": "PercentageWithSymbol",
+        "type": "nominal",
+        "title": "Percentage"
+      }
+    ]
+  },
+  "view": {"stroke": null},
+  "config": {
+    "legend": {"orient": "right", "titleFontSize": 14, "labelFontSize": 14}
+  }
+}
