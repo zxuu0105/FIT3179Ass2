@@ -9,13 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-    <!-- 引入 Google Fonts -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #b8b7b7; /* 修改页面背景色为略浅的灰色 */
+            background-color: #b8b7b7; 
             margin: 0;
             padding: 20px;
             text-align: center;
@@ -25,9 +25,9 @@
             font-family: 'Lobster', cursive;
             font-size: 48px;
             color: #333;
-            max-width: 800px;  /* 限制最大宽度 */
-            margin: 0 auto;  /* 居中对齐 */
-            word-wrap: break-word;  /* 自动换行 */
+            max-width: 800px; 
+            margin: 0 auto;  
+            word-wrap: break-word; 
         }
 
         h2 {
@@ -36,9 +36,9 @@
             font-size: 28px;
             color: #555;
             margin-bottom: 30px;
-            max-width: 600px;  /* 限制最大宽度 */
-            margin: 0 auto;  /* 居中对齐 */
-            word-wrap: break-word;  /* 自动换行 */
+            max-width: 600px;  
+            margin: 0 auto;  
+            word-wrap: break-word;  
         }
 
         p {
@@ -47,42 +47,42 @@
             color: #525252;
             margin-top: 20px;
             margin-bottom: 20px;
-            max-width: 1100px;  /* 限制最大宽度 */
+            max-width: 1100px; 
             margin: 20px 15px 10px 50px;
-            word-wrap: break-word;  /* 自动换行 */
+            word-wrap: break-word; 
         }
 
   
     
 
-        /* 通用方块样式 */
+       
         .section {
-            background-color: #fff; /* 调整为白色背景 */
+            background-color: #fff; 
             padding: 60px;
             margin-bottom: 80px;
             border-radius: 8px;
-            border: 2px solid #e0e0e0; /* 添加边框 */
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
-            max-width: 1250px; /* 限制每个 section 的最大宽度 */
+            border: 2px solid #e0e0e0; 
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); 
+            max-width: 1250px; 
             margin: 20px 30px 10px 450px;
             margin: 0 auto;
 
             
         }
 
-        /* 用于并排显示的容器 */
+        
         .row {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 20px; /* 使用 gap 来调整图表之间的距离 */
+            gap: 20px; 
             margin-bottom: 20px;
         }
 
         .vis-container {
-            width: 100%; /* 调整每个图表容器的宽度 */
+            width: 100%;
             display: flex;
-            justify-content: center; /* 图表容器居中 */
+            justify-content: center;
         }
 
         .vis-container div {
@@ -218,111 +218,111 @@
 
     
     <script type="text/javascript">
-        // 加载第1个可视化: 澳大利亚的移民热力图
+        // vis1
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auMap.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 450;  // 调整热力图宽度
-            spec.height = 400;  // 调整热力图高度
+            spec.width = 450;  
+            spec.height = 400;  
             vegaEmbed('#vis1', spec).catch(console.error);
         });
 
-        // 加载新的柱状图
+        // vis2
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_auPopulationBarChart.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 450;  // 调整柱状图宽度
-            spec.height = 400;  // 调整柱状图高度
+            spec.width = 450; 
+            spec.height = 400;  
             vegaEmbed('#vis4', spec).catch(console.error);
         });
 
-        // 加载第2个可视化: 澳大利亚的州移民数据对比
+        // vis2
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualisation-lineChartStates.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 650;  // 调整折线图宽度
-            spec.height = 600;  // 调整折线图高度
+            spec.width = 650; 
+            spec.height = 600;  
             vegaEmbed('#vis2', spec).catch(console.error);
         });
 
-        // 加载第3个可视化: 各国移民人口的条形图
+        // vis3
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_allCountryBar.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 650;  // 调整折线图宽度
-            spec.height = 600;  // 调整折线图高度
+            spec.width = 650;  
+            spec.height = 600;  
             vegaEmbed('#vis3', spec).catch(console.error);
         });
 
-         // 加载 UK 的移民趋势折线图
+         
          fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_UK.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 450;  // 调整折线图宽度
-            spec.height = 400;  // 调整折线图高度
+            spec.width = 450;  
+            spec.height = 400; 
             vegaEmbed('#visUK', spec).catch(console.error);
         });
     
-        // 加载 New Zealand 的移民趋势折线图
+       
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_NewZealand.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 450;  // 调整折线图宽度
-            spec.height = 400;  // 调整折线图高度
+            spec.width = 450;  
+            spec.height = 400; 
             vegaEmbed('#visNZ', spec).catch(console.error);
         });
     
-        // 加载 India 的移民趋势折线图
+       
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_India.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 450;  // 调整折线图宽度
-            spec.height = 400;  // 调整折线图高度
+            spec.width = 450; 
+            spec.height = 400;  
             vegaEmbed('#visIndia', spec).catch(console.error);
         });
     
-        // 加载 China 的移民趋势折线图
+        
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_China.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 450;  // 调整折线图宽度
-            spec.height = 400;  // 调整折线图高度
+            spec.width = 450; 
+            spec.height = 400;  
             vegaEmbed('#visChina', spec).catch(console.error);
         });
 
-        // 加载 QL 饼图
+       
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_QL.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 350;  // 调整饼图宽度
-            spec.height = 300;  // 调整饼图高度
+            spec.width = 350; 
+            spec.height = 300;  
             vegaEmbed('#visQL', spec).catch(console.error);
         });
 
-        // 加载 VIC 饼图
+       
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_VIC.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 350;  // 调整饼图宽度
-            spec.height = 300;  // 调整饼图高度
+            spec.width = 350;  
+            spec.height = 300;  
             vegaEmbed('#visVIC', spec).catch(console.error);
         });
 
-        // 加载 NSW 饼图
+        
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_NSW.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 350;  // 调整饼图宽度
-            spec.height = 300;  // 调整饼图高度
+            spec.width = 350;  
+            spec.height = 300;  
             vegaEmbed('#visNSW', spec).catch(console.error);
         });
 
-        // 加载 WA 饼图
+     
         fetch('https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/visualization_WA.json')
         .then(response => response.json())
         .then(spec => {
-            spec.width = 350;  // 调整饼图宽度
-            spec.height = 300;  // 调整饼图高度
+            spec.width = 350; 
+            spec.height = 300;  
             vegaEmbed('#visWA', spec).catch(console.error);
         });
     </script>
