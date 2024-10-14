@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Line chart showing immigration numbers from India to Australia from 2011 to 2015, with points for each year.",
   "width": 600,
   "height": 400,
   "title": {
