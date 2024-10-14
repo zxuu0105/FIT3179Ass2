@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Line chart showing immigration trends from 2011 to 2015 for each Australian state, with data points on the lines and tooltips.",
   "data": {
     "url": "https://raw.githubusercontent.com/zxuu0105/FIT3179Ass2/refs/heads/main/datasource-auTotal.csv",
     "format": {"type": "csv"}
