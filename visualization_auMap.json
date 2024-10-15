@@ -38,6 +38,9 @@
         {
           "calculate": "datum.Immigration / datum['Territory Area (km?)']",
           "as": "ImmigrationDensity"
+        },
+        {
+          "filter": "datum.Year == year_select"
         }
       ],
       "mark": {"type": "geoshape"},
@@ -53,8 +56,8 @@
           {
             "field": "ImmigrationDensity",
             "type": "quantitative",
-            "title": "Immigration Density",
-            "format": ".3f"
+            "title": "Immigration Density"
+            
           }
         ],
         "opacity": {
