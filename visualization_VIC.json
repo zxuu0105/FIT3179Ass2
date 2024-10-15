@@ -21,7 +21,7 @@
       "frame": [null, null]
     },
     {
-      "calculate": "round(datum.Total / datum.TotalSum * 100 * 10) / 10",
+      "calculate": "round(datum.Total / datum.TotalSum * 100)",
       "as": "Percentage"
     },
     {"calculate": "datum.Percentage + '%'", "as": "PercentageWithSymbol"}
@@ -53,7 +53,6 @@
       {"field": "Total", "type": "quantitative", "title": "Total Immigration"},
       {
         "field": "PercentageWithSymbol",
-        "type": "nominal",
         "title": "Percentage"
       }
     ]
